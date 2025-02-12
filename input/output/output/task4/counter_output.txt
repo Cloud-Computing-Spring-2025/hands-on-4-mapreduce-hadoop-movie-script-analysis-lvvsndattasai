@@ -1,0 +1,6 @@
+==== Hadoop Counter Output ====
+Total Lines Processed: 1032
+Total Words Processed: 9600
+Total Characters Processed: 49752
+Total Unique Words Identified: 223068
+Number of Characters Speaking: 1032
