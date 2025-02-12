@@ -15,6 +15,20 @@ public class CharacterWordMapper extends Mapper<Object, Text, Text, IntWritable>
 
     @Override
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        String line = value.toString();
+        if (line.contains(":")) {
+            String[] parts = line.split(":", 2);
+            String character = parts[0].trim();
+            String dialogue = parts[1].trim();
+            StringTokenizer tokenizer = new StringTokenizer(dialogue);
 
+            while (tokenizer.hasMoreTokens()) {
+                word.set(tokenizer.nextToken().replaceAll("[^a-zA-Z]", "").toLowerCase());
+                if (!word.toString().isEmpty()) {
+                    characterWord.set(character + "#" + word.toString());
+                    context.write(characterWord, one);
+                }
+            }
+        }
     }
 }
